@@ -8,6 +8,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import type { ContentItem } from '../../types';
+import { ContentTaxonomy } from './ContentTaxonomy';
 
 interface ArticleDrawerProps {
   item: ContentItem | null;
@@ -526,6 +527,8 @@ const ArticleDrawerContent: React.FC<ArticleDrawerContentProps> = ({
                   </div>
                 </div>
               )}
+
+              <ContentTaxonomy contentId={item.id} />
             </div>
           )}
 

@@ -12,6 +12,8 @@ import { ProjectMember } from "../../entities/project-member.entity";
 import { Content } from "../../entities/content.entity";
 import { Tag } from "../../entities/tag.entity";
 import { ContentTag } from "../../entities/content-tag.entity";
+import { Category } from "../../entities/category.entity";
+import { ContentCategory } from "../../entities/content-category.entity";
 import { Task } from "../../entities/task.entity";
 import { TaskComment } from "../../entities/task-comment.entity";
 import { TaskDependency } from "../../entities/task-dependency.entity";
@@ -43,6 +45,8 @@ export const AppDataSource = new DataSource({
     Content,
     Tag,
     ContentTag,
+    Category,
+    ContentCategory,
     Task,
     TaskComment,
     TaskDependency,
