@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   X,
   FilePlus,
@@ -7,14 +7,16 @@ import {
   Palette,
   Terminal,
   CheckCircle2,
-} from 'lucide-react';
-import type { ContentItem } from '../../types';
-import { AUTHORS } from '../../data/mockContent';
+} from "lucide-react";
+import { projectApi } from "../../api/axiosClient";
+import type { ApiProjectResponse } from "../../api/types";
+import type { ContentItem } from "../../types";
 
 export interface NewContentPayload {
   title: string;
   slug: string;
   body?: string;
+  projectId?: string;
 }
 
 interface NewContentModalProps {
@@ -28,37 +30,98 @@ interface NewContentModalContentProps {
   onCreateItem: (payload: NewContentPayload) => Promise<void>;
 }
 
+const generateSlug = (
+  titleValue: string,
+  activeProject: string,
+  projectLookup: ApiProjectResponse[],
+) => {
+  const selectedProject = projectLookup.find(
+    (item) => item.project_id === activeProject,
+  );
+  const projectSlugSegment =
+    (selectedProject?.key_code ?? selectedProject?.name ?? "project")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "project";
+
+  return (
+    "/" +
+    projectSlugSegment +
+    "/" +
+    titleValue
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .trim()
+      .replace(/\s+/g, "-")
+  );
+};
+
 const NewContentModalContent: React.FC<NewContentModalContentProps> = ({
   onClose,
   onCreateItem,
 }) => {
-  const [title, setTitle] = useState('');
-  const [slug, setSlug] = useState('');
-  const [project, setProject] = useState('core-cms');
-  const [authorKey, setAuthorKey] = useState<keyof typeof AUTHORS>('eleanor');
-  const [icon, setIcon] = useState<ContentItem['icon']>('article');
-  const [summary, setSummary] = useState('');
+  const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
+  const [project, setProject] = useState("");
+  const [projectOptions, setProjectOptions] = useState<ApiProjectResponse[]>(
+    [],
+  );
+  const [icon, setIcon] = useState<ContentItem["icon"]>("article");
+  const [summary, setSummary] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    projectApi
+      .list({ per_page: 100 })
+      .then((res) => {
+        if (cancelled) return;
+        const projects = res.data ?? [];
+        setProjectOptions(projects);
+        if (projects.length === 0) {
+          setProject("");
+          return;
+        }
+
+        setProject((currentProject) => {
+          if (
+            currentProject &&
+            projects.some((item) => item.project_id === currentProject)
+          ) {
+            return currentProject;
+          }
+          return projects[0].project_id;
+        });
+      })
+      .catch(() => {
+        if (!cancelled) setProjectOptions([]);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!title.trim()) return;
+    setSlug((currentSlug) => {
+      const generatedSlug = generateSlug(title, project, projectOptions);
+      if (
+        !currentSlug ||
+        currentSlug === generatedSlug ||
+        currentSlug.startsWith("/")
+      ) {
+        return generatedSlug;
+      }
+      return currentSlug;
+    });
+  }, [title, project, projectOptions]);
+
   const handleTitleChange = (val: string) => {
     setTitle(val);
-    const generatedSlug =
-      '/' +
-      (project === 'core-cms'
-        ? 'announcements'
-        : project === 'security'
-        ? 'security'
-        : project === 'mobile'
-        ? 'design'
-        : 'infrastructure') +
-      '/' +
-      val
-        .toLowerCase()
-        .replace(/[^a-z0-9\s-]/g, '')
-        .trim()
-        .replace(/\s+/g, '-');
-    setSlug(generatedSlug);
+    setSlug(generateSlug(val, project, projectOptions));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -70,14 +133,19 @@ const NewContentModalContent: React.FC<NewContentModalContentProps> = ({
     try {
       await onCreateItem({
         title: title.trim(),
-        slug: slug || `/docs/${title.toLowerCase().replace(/\s+/g, '-')}`,
+        slug: slug || `/docs/${title.toLowerCase().replace(/\s+/g, "-")}`,
         body:
           summary.trim() ||
           `### ${title}\nInitial draft documentation initialized.`,
+        projectId: project || undefined,
       });
       onClose();
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : 'Something went wrong — please try again.');
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong — please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -95,7 +163,9 @@ const NewContentModalContent: React.FC<NewContentModalContentProps> = ({
             <div className="w-7 h-7 rounded-lg bg-[#e6e0f5] text-[#5645d4] flex items-center justify-center">
               <FilePlus className="w-4 h-4" />
             </div>
-            <h3 className="text-base font-semibold text-[#37352f]">Create New Content</h3>
+            <h3 className="text-base font-semibold text-[#37352f]">
+              Create New Content
+            </h3>
           </div>
           <button
             onClick={onClose}
@@ -122,7 +192,9 @@ const NewContentModalContent: React.FC<NewContentModalContentProps> = ({
           </div>
 
           <div>
-            <label className="font-semibold text-[#5d5b54] block mb-1">URL Slug</label>
+            <label className="font-semibold text-[#5d5b54] block mb-1">
+              URL Slug
+            </label>
             <input
               type="text"
               value={slug}
@@ -134,58 +206,40 @@ const NewContentModalContent: React.FC<NewContentModalContentProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="font-semibold text-[#5d5b54] block mb-1">Target Project</label>
+              <label className="font-semibold text-[#5d5b54] block mb-1">
+                Target Project
+              </label>
               <select
                 value={project}
                 onChange={(e) => setProject(e.target.value)}
-                className="w-full text-xs px-2.5 py-2 border border-[#e8e7e4] rounded-lg bg-white outline-none focus:border-[#5645d4]"
+                disabled={projectOptions.length === 0}
+                className="w-full text-xs px-2.5 py-2 border border-[#e8e7e4] rounded-lg bg-white outline-none focus:border-[#5645d4] disabled:bg-[#f6f5f4] disabled:text-[#9b9a97]"
               >
-                <option value="core-cms">Enterprise Core CMS</option>
-                <option value="security">Security &amp; Architecture</option>
-                <option value="mobile">Design System Mobile</option>
-                <option value="cloud">Cloud Infrastructure</option>
-              </select>
-            </div>
-
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="font-semibold text-[#5d5b54] block mb-1">Author</label>
-              <select
-                value={authorKey}
-                onChange={(e) => setAuthorKey(e.target.value as keyof typeof AUTHORS)}
-                className="w-full text-xs px-2.5 py-2 border border-[#e8e7e4] rounded-lg bg-white outline-none focus:border-[#5645d4]"
-              >
-                <option value="eleanor">Eleanor Vance (Operations Lead)</option>
-                <option value="emily">Emily Watson</option>
-                <option value="sarah">Sarah Jenkins</option>
-                <option value="david">David Kim</option>
-                <option value="marcus">Marcus Chen</option>
-                <option value="elena">Elena Rostova</option>
+                {projectOptions.length === 0 ? (
+                  <option value="">No projects available</option>
+                ) : (
+                  projectOptions.map((item) => (
+                    <option key={item.project_id} value={item.project_id}>
+                      {item.name}
+                    </option>
+                  ))
+                )}
               </select>
             </div>
           </div>
-
-          {/* NOTE: Project and Author above are cosmetic for now. There's no
-              live Projects or Users API yet (see index.ts — both routers are
-              commented out), so real content always saves under the
-              placeholder project/author configured in ContentDashboard.
-              Swap this note out once those modules exist. */}
-          <p className="text-[11px] text-[#9b9a97] -mt-2">
-            Project and Author selection isn't wired to real data yet — new content saves under a placeholder project and author for now.
-          </p>
 
           <div>
-            <label className="font-semibold text-[#5d5b54] block mb-1">Icon Category</label>
+            <label className="font-semibold text-[#5d5b54] block mb-1">
+              Icon Category
+            </label>
             <div className="grid grid-cols-6 gap-2">
               {[
-                { id: 'article', label: 'Article', icon: FileText },
-                { id: 'shield', label: 'Security', icon: Shield },
-                { id: 'palette', label: 'Design', icon: Palette },
-                { id: 'description', label: 'Doc', icon: FileText },
-                { id: 'terminal', label: 'Dev', icon: Terminal },
-                { id: 'verified', label: 'Audit', icon: CheckCircle2 },
+                { id: "article", label: "Article", icon: FileText },
+                { id: "shield", label: "Security", icon: Shield },
+                { id: "palette", label: "Design", icon: Palette },
+                { id: "description", label: "Doc", icon: FileText },
+                { id: "terminal", label: "Dev", icon: Terminal },
+                { id: "verified", label: "Audit", icon: CheckCircle2 },
               ].map((ic) => {
                 const IconComponent = ic.icon;
                 const isSelected = icon === ic.id;
@@ -193,11 +247,11 @@ const NewContentModalContent: React.FC<NewContentModalContentProps> = ({
                   <button
                     key={ic.id}
                     type="button"
-                    onClick={() => setIcon(ic.id as ContentItem['icon'])}
+                    onClick={() => setIcon(ic.id as ContentItem["icon"])}
                     className={`p-2 rounded-lg border flex flex-col items-center gap-1 transition-all ${
                       isSelected
-                        ? 'border-[#5645d4] bg-[#e6e0f5] text-[#5645d4]'
-                        : 'border-[#e8e7e4] text-[#5d5b54] hover:bg-[#f0f4f8]'
+                        ? "border-[#5645d4] bg-[#e6e0f5] text-[#5645d4]"
+                        : "border-[#e8e7e4] text-[#5d5b54] hover:bg-[#f0f4f8]"
                     }`}
                   >
                     <IconComponent className="w-4 h-4" />
@@ -209,7 +263,9 @@ const NewContentModalContent: React.FC<NewContentModalContentProps> = ({
           </div>
 
           <div>
-            <label className="font-semibold text-[#5d5b54] block mb-1">Summary / Abstract</label>
+            <label className="font-semibold text-[#5d5b54] block mb-1">
+              Summary / Abstract
+            </label>
             <textarea
               rows={3}
               value={summary}
@@ -220,7 +276,9 @@ const NewContentModalContent: React.FC<NewContentModalContentProps> = ({
           </div>
 
           {submitError && (
-            <p className="text-xs text-[#ba1a1a] bg-[#fde0e0] p-2 rounded-lg">{submitError}</p>
+            <p className="text-xs text-[#ba1a1a] bg-[#fde0e0] p-2 rounded-lg">
+              {submitError}
+            </p>
           )}
 
           {/* Modal Footer Actions */}
@@ -238,7 +296,7 @@ const NewContentModalContent: React.FC<NewContentModalContentProps> = ({
               disabled={!title.trim() || isSubmitting}
               className="px-4 py-2 text-xs font-medium bg-[#5645d4] hover:bg-[#4534b3] text-white rounded-lg shadow-sm transition-all disabled:opacity-50 cursor-pointer"
             >
-              {isSubmitting ? 'Creating...' : 'Create Publication'}
+              {isSubmitting ? "Creating..." : "Create Publication"}
             </button>
           </div>
         </form>
@@ -255,5 +313,7 @@ export const NewContentModal: React.FC<NewContentModalProps> = ({
   onCreateItem,
 }) => {
   if (!isOpen) return null;
-  return <NewContentModalContent onClose={onClose} onCreateItem={onCreateItem} />;
+  return (
+    <NewContentModalContent onClose={onClose} onCreateItem={onCreateItem} />
+  );
 };

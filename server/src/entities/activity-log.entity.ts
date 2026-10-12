@@ -3,47 +3,54 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  ManyToOne,
-  JoinColumn,
+  Index,
 } from "typeorm";
 import { Project } from "./project.entity";
 import { User } from "./user.entity";
 
+export enum AuditSeverity {
+  INFO = "info",
+  WARNING = "warning",
+  CRITICAL = "critical",
+}
+
 @Entity("activity_logs")
+@Index(["project_id"])
+@Index(["user_id"])
+@Index(["entity_type", "entity_id"])
+@Index(["action"])
+@Index(["created_at"])
 export class ActivityLog {
   @PrimaryGeneratedColumn("uuid")
   activity_id!: string;
 
   @Column({ type: "uuid", nullable: true })
-  project_id?: string;
+  user_id?: string | null;
 
-  @Column({ type: "uuid" })
-  user_id!: string;
-
-  @Column({ type: "varchar", length: 100 })
-  action!: string;
+  @Column({ type: "uuid", nullable: true })
+  project_id?: string | null;
 
   @Column({ type: "varchar", length: 50 })
   entity_type!: string;
 
   @Column({ type: "uuid", nullable: true })
-  entity_id?: string;
+  entity_id?: string | null;
+
+  @Column({ type: "varchar", length: 100, default: "UPDATE" })
+  action!: string;
 
   @Column({ type: "text", nullable: true })
-  description?: string;
+  description?: string | null;
 
-  @CreateDateColumn({ type: "timestamp" })
+  @CreateDateColumn({ type: "timestamptz" })
   created_at!: Date;
-
-  @ManyToOne(() => Project, {
-    onDelete: "CASCADE",
-    nullable: true,
-  })
-  @JoinColumn({ name: "project_id" })
-  project?: Project;
-  @ManyToOne(() => User, {
-    onDelete: "CASCADE",
-  })
-  @JoinColumn({ name: "user_id" })
-  user!: User;
+  
+  severity?: string;
+  before_data?: Record<string, any>;
+  after_data?: Record<string, any>;
+  metadata?: Record<string, any>;
+  ip_address?: string;
+  user_agent?: string;
+  user?: User | null;
+  project?: Project | null;
 }
