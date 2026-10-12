@@ -6,6 +6,9 @@ import { instanceToPlain } from "class-transformer";
 import { AppDataSource } from "./src/shared/db/data-source";
 import { errorHandler, notFoundHandler } from "./src/shared/middleware/error.middleware";
 
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./src/shared/swagger/swagger.setup";
+
 import { authRouter } from "./src/features/authentication/auth.routes";
 import { contentsRouter } from "./src/features/contents/content.routes";
 import { usersRouter } from "./src/features/users/users.routes";
@@ -36,6 +39,26 @@ app.use((req, res, next) => {
   const originalJson = res.json.bind(res);
   res.json = (body: any) => originalJson(instanceToPlain(body));
   next();
+});
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, {
+    customSiteTitle: "PMS API Docs",
+    swaggerOptions: {
+      persistAuthorization: true,
+      displayRequestDuration: true,
+      docExpansion: "none",
+      filter: true,
+      tryItOutEnabled: true,
+    },
+  }),
+);
+
+app.get("/api-docs.json", (_req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
 });
 
 app.get("/", (_req, res) => {
@@ -71,6 +94,7 @@ async function startServer() {
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
       console.log(`API routes available under ${API_PREFIX}`);
+      console.log(`Swagger docs available at http://localhost:${PORT}/api-docs`); 
     });
   } catch (error) {
     console.error("Error starting server:", error);
