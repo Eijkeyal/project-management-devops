@@ -4,6 +4,8 @@ import LoginPage from "./pages/LoginPage";
 import UserManagement from "./pages/UserManagement";
 import AdminDashboard from "./pages/AdminDashboard";
 import AuditLog from "./pages/AuditLog";
+import FileManagement from "./pages/FileManagement";
+import ApprovalsManagement from "./pages/ApprovalsManagement";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -40,6 +42,22 @@ const App = () => {
           element={
             <ProtectedRoute>
               <AuditLog />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/files"
+          element={
+            <ProtectedRoute>
+              <FileManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/approvals"
+          element={
+            <ProtectedRoute>
+              <ApprovalsManagement />
             </ProtectedRoute>
           }
         />
