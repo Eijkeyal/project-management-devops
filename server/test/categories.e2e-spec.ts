@@ -2,6 +2,8 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import { app } from '../index';
 import { AppDataSource } from '../src/shared/db/data-source';
+import { Role } from '../src/entities/role.entity';
+import { User } from '../src/entities/user.entity';
 
 // Needs the categories tables: run server/sql/categories.sql on the test DB first.
 
@@ -10,7 +12,9 @@ const RUN_ID = Date.now().toString(36).slice(-6).toLowerCase();
 
 const ADMIN_EMAIL = 'admin@example.com';
 const ADMIN_PASSWORD = 'Admin@123';
-const EMPLOYEE_EMAIL = 'cimonabebe2@gmail.com';
+// The Employee is created for this run (see beforeAll), so the spec doesn't
+// depend on any particular account already existing in the database.
+const EMPLOYEE_EMAIL = `cat-e2e-${RUN_ID}@test.local`;
 const EMPLOYEE_PASSWORD = 'Test@12345';
 
 const GHOST_ID = '00000000-0000-4000-8000-000000000000';
@@ -18,6 +22,7 @@ const GHOST_ID = '00000000-0000-4000-8000-000000000000';
 describe('Categories E2E', () => {
   let adminToken: string;
   let employeeToken: string;
+  let employeeUserId: string | undefined;
 
   // Every category created by a test, so afterAll can remove them
   // (children first, otherwise the parent delete is refused).
@@ -40,19 +45,58 @@ describe('Categories E2E', () => {
       .post(`${API}/auth/login`)
       .send({ email: ADMIN_EMAIL, password: ADMIN_PASSWORD });
     adminToken = adminLogin.body.data?.accessToken;
-    expect(adminToken).toBeDefined();
+    expect(
+      adminToken,
+      `Admin login failed: ${adminLogin.status} ${JSON.stringify(adminLogin.body)} (run "npm run seed" first)`
+    ).toBeDefined();
+
+    // Throwaway Employee for the role-guard tests. The API creates users with
+    // an unverified email, so mark it verified directly in the database.
+    const employeeRole = await AppDataSource.getRepository(Role).findOne({
+      where: { name: 'Employee' },
+    });
+    expect(employeeRole, 'Employee role not found — run "npm run seed" first').toBeTruthy();
+
+    const created = await request(app)
+      .post(`${API}/users`)
+      .set(auth(adminToken))
+      .send({
+        role_id: employeeRole!.role_id,
+        first_name: 'Category',
+        last_name: 'Tester',
+        email: EMPLOYEE_EMAIL,
+        password: EMPLOYEE_PASSWORD,
+      });
+    employeeUserId = created.body.data?.user_id;
+    expect(
+      employeeUserId,
+      `Creating the test employee failed: ${created.status} ${JSON.stringify(created.body)}`
+    ).toBeDefined();
+
+    await AppDataSource.getRepository(User).update(
+      { user_id: employeeUserId! },
+      { email_verified: true }
+    );
 
     const empLogin = await request(app)
       .post(`${API}/auth/login`)
       .send({ email: EMPLOYEE_EMAIL, password: EMPLOYEE_PASSWORD });
     employeeToken = empLogin.body.data?.accessToken;
-    expect(employeeToken).toBeDefined();
+    expect(
+      employeeToken,
+      `Employee login failed: ${empLogin.status} ${JSON.stringify(empLogin.body)}`
+    ).toBeDefined();
   });
 
   afterAll(async () => {
     for (const id of [...createdIds].reverse()) {
       try {
         await request(app).delete(`${API}/categories/${id}`).set(auth(adminToken));
+      } catch {}
+    }
+    if (employeeUserId) {
+      try {
+        await request(app).delete(`${API}/users/${employeeUserId}`).set(auth(adminToken));
       } catch {}
     }
   });

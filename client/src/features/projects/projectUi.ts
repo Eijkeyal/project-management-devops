@@ -1,4 +1,5 @@
-import type { ApiProjectResponse, ApiUserProfile } from '../../api/types';
+import type { ApiProjectResponse } from '../../api/types';
+import type { ApiUserProfile } from '../../api/authTypes';
 
 // Mirrors PROJECT_STATUSES / PROJECT_PRIORITIES in server project.dto.ts.
 export const STATUSES = ['Planned', 'Active', 'On Hold', 'Completed', 'Archived'] as const;

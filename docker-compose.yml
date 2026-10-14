@@ -1,0 +1,13 @@
+services:
+  server:
+    build: ./server
+    env_file: ./server/.env            # DATABASE_URL, JWT secrets, SMTP...
+    environment:
+      FRONTEND_URL: http://localhost:3000
+    volumes: [uploads:/app/uploads]    # uploaded files live on disk
+  client:
+    build: ./client
+    ports: ["3000:80"]
+    depends_on: [server]
+volumes:
+  uploads:
