@@ -45,6 +45,8 @@ export const createProjectSchema = z.object({
 
   priority: z.enum(PROJECT_PRIORITIES).optional(),
 
+  budget: z.coerce.number().min(0).max(9999999999.99).nullable().optional(),
+
   start_date: z.coerce.date().optional(),
 
   due_date: z.coerce.date().optional(),

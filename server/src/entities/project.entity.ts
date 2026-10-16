@@ -43,6 +43,9 @@ export class Project {
   @Column({ type: "varchar", length: 50, default: "Medium" })
   priority!: string;
 
+  @Column({ type: "numeric", precision: 12, scale: 2, nullable: true })
+  budget!: string | null;
+
   @Column({ type: "date", nullable: true, name: "start_date" })
   start_date!: Date | null;
 
