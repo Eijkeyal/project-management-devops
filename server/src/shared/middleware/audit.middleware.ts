@@ -63,7 +63,6 @@ export async function writeAudit(input: WriteAuditInput): Promise<void> {
       ...(input.metadata ?? {}),
       requestId: input.ctx.requestId ?? null,
     };
-
     await repo.insert({
       user_id: input.ctx.userId,
       actor_email: input.ctx.actorEmail ?? null,
@@ -79,7 +78,7 @@ export async function writeAudit(input: WriteAuditInput): Promise<void> {
       ip_address: input.ctx.ip ?? null,
       user_agent: input.ctx.userAgent ?? null,
       severity: input.severity ?? AuditSeverity.INFO,
-    });
+    } as any);
   } catch (err) {
     console.error("[audit] write failed:", (err as Error).message);
   }

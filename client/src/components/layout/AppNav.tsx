@@ -17,6 +17,8 @@ const AppNav = () => {
     { path: "/admin/projects", label: "Projects" },
     { path: "/admin/tasks", label: "Tasks" },
     { path: "/admin/content", label: "Content" },
+    { path: "/admin/files", label: "Files" },
+    { path: "/admin/approvals", label: "Approvals" },
     { path: "/admin/audit-logs", label: "Audit Logs" },
   ];
 

@@ -45,21 +45,32 @@ export class ActivityLog {
   @Column({ type: "text", nullable: true })
   description?: string | null;
 
+  @Column({ type: "varchar", length: 20, default: AuditSeverity.INFO })
+  severity!: AuditSeverity;
+
+  @Column({ type: "jsonb", nullable: true })
+  before_data?: Record<string, any> | null;
+
+  @Column({ type: "jsonb", nullable: true })
+  after_data?: Record<string, any> | null;
+
+  @Column({ type: "jsonb", nullable: true, default: {} })
+  metadata?: Record<string, any>;
+
+  @Column({ type: "varchar", length: 45, nullable: true })
+  ip_address?: string | null;
+
+  @Column({ type: "text", nullable: true })
+  user_agent?: string | null;
+
   @CreateDateColumn({ type: "timestamptz" })
   created_at!: Date;
 
-  @ManyToOne(() => User, { nullable: true })
+  @ManyToOne(() => User, { onDelete: "SET NULL", nullable: true })
   @JoinColumn({ name: "user_id" })
   user?: User | null;
 
-  @ManyToOne(() => Project, { nullable: true })
+  @ManyToOne(() => Project, { onDelete: "SET NULL", nullable: true })
   @JoinColumn({ name: "project_id" })
   project?: Project | null;
-
-  severity?: string;
-  before_data?: Record<string, any>;
-  after_data?: Record<string, any>;
-  metadata?: Record<string, any>;
-  ip_address?: string;
-  user_agent?: string;
 }

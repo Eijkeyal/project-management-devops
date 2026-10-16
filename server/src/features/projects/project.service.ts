@@ -694,16 +694,18 @@ class ProjectService {
       take: 10,
     });
 
-    const files = projectFiles.map((pf) => ({
-      file_id: pf.file.file_id,
-      original_name: pf.file.original_name,
-      mime_type: pf.file.mime_type,
-      size_bytes: pf.file.size_bytes,
-      checksum: pf.file.checksum,
-      uploaded_by: pf.file.uploaded_by,
-      file_created_at: pf.file.created_at,
-      added_to_project_at: pf.created_at,
-    }));
+      const files = projectFiles
+      .filter((pf) => pf.file && !pf.file.deleted_at)
+      .map((pf) => ({
+        file_id: pf.file!.file_id,
+        original_name: pf.file!.original_name,
+        mime_type: pf.file!.mime_type,
+        size_bytes: pf.file!.size_bytes,
+        checksum: pf.file!.checksum,
+        uploaded_by: pf.file!.uploaded_by,
+        file_created_at: pf.file!.created_at,
+        added_to_project_at: pf.created_at,
+      }));
 
     const recentActivity = await this.activityLogRepository.find({
       where: { project_id: projectId },
