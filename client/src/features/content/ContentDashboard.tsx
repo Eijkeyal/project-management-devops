@@ -47,8 +47,8 @@ export const ContentDashboard = () => {
   // navigate() specifically so every existing call site below (Sidebar,
   // OtherViews, QuickSearchModal) needs zero changes.
   const navigate = useNavigate();
-  const { navKey } = useParams<{ navKey: string }>();
-  const activeNav = resolveNavKey(navKey);
+  const { navKey, projectId } = useParams<{ navKey: string; projectId: string }>();
+  const activeNav = projectId ? 'projects-and-roadmaps' : resolveNavKey(navKey);
   const setActiveNav = (nav: ActiveNavKey) => navigate(NAV_PATHS[nav]);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 

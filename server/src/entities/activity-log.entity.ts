@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   Index,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
+
 import { Project } from "./project.entity";
 import { User } from "./user.entity";
 
@@ -44,13 +47,19 @@ export class ActivityLog {
 
   @CreateDateColumn({ type: "timestamptz" })
   created_at!: Date;
-  
+
+  @ManyToOne(() => User, { nullable: true })
+  @JoinColumn({ name: "user_id" })
+  user?: User | null;
+
+  @ManyToOne(() => Project, { nullable: true })
+  @JoinColumn({ name: "project_id" })
+  project?: Project | null;
+
   severity?: string;
   before_data?: Record<string, any>;
   after_data?: Record<string, any>;
   metadata?: Record<string, any>;
   ip_address?: string;
   user_agent?: string;
-  user?: User | null;
-  project?: Project | null;
 }

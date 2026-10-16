@@ -11,6 +11,7 @@ import UserManagement from "./pages/UserManagement";
 import AdminDashboard from "./pages/AdminDashboard";
 import AuditLog from "./pages/AuditLog";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ProjectsPage from "./features/projects/ProjectsPage";
 
 const App = () => {
   return (
@@ -52,7 +53,7 @@ const App = () => {
           path="/projects/:projectId"
           element={
             <RequireAuth>
-              <ContentDashboard />
+              <ProjectsPage />
             </RequireAuth>
           }
         />

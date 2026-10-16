@@ -10,13 +10,14 @@
     "dev": "tsx watch index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "typeorm": "typeorm-ts-node-esm -d src/shared/db/data-source.ts",
+    "typeorm": "tsx ./node_modules/typeorm/cli.js -d src/shared/db/data-source.ts",
     "migration:generate": "npm run typeorm -- migration:generate",
     "migration:run": "npm run typeorm -- migration:run",
     "migration:revert": "npm run typeorm -- migration:revert",
     "migration:show": "npm run typeorm -- migration:show",
     "schema:sync": "tsx src/shared/db/data-source.ts",
-    "seed": "tsx src/shared/db/seed.ts"
+    "seed": "tsx src/shared/db/seed.ts",
+    "seed:uat": "tsx src/shared/db/seed-uat.ts"
   },
   "keywords": [],
   "author": "",

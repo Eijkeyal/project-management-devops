@@ -3,7 +3,7 @@ services:
     build: ./server
     env_file: ./server/.env            # DATABASE_URL, JWT secrets, SMTP...
     environment:
-      FRONTEND_URL: http://localhost:3000
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
     volumes: [uploads:/app/uploads]    # uploaded files live on disk
   client:
     build: ./client
