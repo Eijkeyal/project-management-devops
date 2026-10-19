@@ -1,8 +1,7 @@
 services:
   server:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
+    image: eijkeyal/pms-server:latest
+    build: ./server
     container_name: pms-server
     restart: unless-stopped
     env_file:
@@ -11,9 +10,8 @@ services:
       - "5001:5001"
 
   client:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
+    image: eijkeyal/pms-client:latest
+    build: ./client
     container_name: pms-client
     restart: unless-stopped
     depends_on:
