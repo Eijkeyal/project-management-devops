@@ -1,8 +1,8 @@
-import { getRepo } from "../../shared/db/repositories";
-import { Task } from "../../entities/task.entity";
-import { TaskDependency } from "../../entities/task-dependency.entity";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import type { CreateTaskDependencyDto } from "./task-dependencies.dto";
+import { getRepo } from "../../shared/db/repositories.js";
+import { Task } from "../../entities/task.entity.js";
+import { TaskDependency } from "../../entities/task-dependency.entity.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import type { CreateTaskDependencyDto } from "./task-dependencies.dto.js";
 
 export class TaskDependencyService {
   private repo() {

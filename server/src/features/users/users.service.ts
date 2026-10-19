@@ -1,19 +1,19 @@
 import bcrypt from "bcryptjs";
 import { IsNull, Not, ILike, In } from "typeorm";
-import { BaseCRUDService } from "../../shared/services/base.service";
-import { User } from "../../entities/user.entity";
-import { RefreshToken } from "../../entities/refresh-token.entity";
+import { BaseCRUDService } from "../../shared/services/base.service.js";
+import { User } from "../../entities/user.entity.js";
+import { RefreshToken } from "../../entities/refresh-token.entity.js";
 import type {
   CreateUserDto,
   UpdateUserDto,
   SearchUsersDto,
   UserStatsResponse,
-} from "./users.dto";
+} from "./users.dto.js";
 import type {
   PaginationParams,
   SortParams,
   PaginatedResponse,
-} from "../../shared/types";
+} from "../../shared/types/index.js";
 
 export class UsersService extends BaseCRUDService<
   User,

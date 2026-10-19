@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
     "types": ["node"],
     "emitDecoratorMetadata": true,
@@ -21,8 +21,7 @@
     "exactOptionalPropertyTypes": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "allowSyntheticDefaultImports": true,
-    "allowImportingTsExtensions": false
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*.ts", "index.ts"],
   "exclude": ["node_modules", "dist"]

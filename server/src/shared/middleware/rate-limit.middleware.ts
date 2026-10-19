@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import { HttpError } from "./error.middleware";
+import { HttpError } from "./error.middleware.js";
 
 interface RateLimitStore {
   [key: string]: {

@@ -10,15 +10,15 @@ import {
   Index,
 } from "typeorm";
 import { Exclude } from "class-transformer";
-import { Role } from "./role.entity";
-import { Project } from "./project.entity";
-import { ProjectMember } from "./project-member.entity";
-import { Content } from "./content.entity";
-import { Task } from "./task.entity";
-import { TaskComment } from "./task-comment.entity";
-import { File } from "./file.entity";
-import { Notification } from "./notification.entity";
-import { ActivityLog } from "./activity-log.entity";
+import { Role } from "./role.entity.js";
+import { Project } from "./project.entity.js";
+import { ProjectMember } from "./project-member.entity.js";
+import { Content } from "./content.entity.js";
+import { Task } from "./task.entity.js";
+import { TaskComment } from "./task-comment.entity.js";
+import { File } from "./file.entity.js";
+import { Notification } from "./notification.entity.js";
+import { ActivityLog } from "./activity-log.entity.js";
 
 @Entity("users")
 @Index(["status"])

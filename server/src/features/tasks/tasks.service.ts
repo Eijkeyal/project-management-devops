@@ -1,15 +1,15 @@
-import { BaseCRUDService } from "../../shared/services/base.service";
-import { getRepo } from "../../shared/db/repositories";
-import { Task } from "../../entities/task.entity";
-import { Notification } from "../../entities/notification.entity";
-import { ActivityLog } from "../../entities/activity-log.entity";
-import { HttpError } from "../../shared/middleware/error.middleware";
+import { BaseCRUDService } from "../../shared/services/base.service.js";
+import { getRepo } from "../../shared/db/repositories.js";
+import { Task } from "../../entities/task.entity.js";
+import { Notification } from "../../entities/notification.entity.js";
+import { ActivityLog } from "../../entities/activity-log.entity.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
 import type {
   CreateTaskDto,
   UpdateTaskDto,
   TaskFilterDto,
-} from "./tasks.dto";
-import type { PaginatedResponse, PaginationParams, SortParams } from "../../shared/types";
+} from "./tasks.dto.js";
+import type { PaginatedResponse, PaginationParams, SortParams } from "../../shared/types/index.js";
 
 export const TASK_STATUSES = [
   "backlog",

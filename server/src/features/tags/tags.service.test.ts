@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { TagsService } from "./tags.service";
-import type { Tag } from "../../entities/tag.entity";
-import type { ContentTag } from "../../entities/content-tag.entity";
+import { TagsService } from "./tags.service.js";
+import type { Tag } from "../../entities/tag.entity.js";
+import type { ContentTag } from "../../entities/content-tag.entity.js";
 
 const mockRepo = {
   findOne: vi.fn(),

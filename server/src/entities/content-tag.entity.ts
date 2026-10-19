@@ -5,8 +5,8 @@ import {
   ManyToOne,
   JoinColumn,
 } from "typeorm";
-import { Content } from "./content.entity";
-import { Tag } from "./tag.entity";
+import { Content } from "./content.entity.js";
+import { Tag } from "./tag.entity.js";
 
 @Entity("content_tags")
 export class ContentTag {

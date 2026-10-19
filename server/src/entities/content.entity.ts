@@ -8,11 +8,11 @@ import {
   JoinColumn,
   OneToMany,
 } from "typeorm";
-import { Project } from "./project.entity";
-import { User } from "./user.entity";
-import { ContentTag } from "./content-tag.entity";
-import { ContentFile } from "./content-file.entity";
-import { ContentStatus } from "./approval.entity";
+import { Project } from "./project.entity.js";
+import { User } from "./user.entity.js";
+import { ContentTag } from "./content-tag.entity.js";
+import { ContentFile } from "./content-file.entity.js";
+import { ContentStatus } from "./approval.entity.js";
 
 @Entity("contents")
 export class Content {

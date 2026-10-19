@@ -5,7 +5,7 @@ import {
   CreateDateColumn,
   OneToMany,
 } from "typeorm";
-import { ContentTag } from "./content-tag.entity";
+import { ContentTag } from "./content-tag.entity.js";
 
 @Entity("tags")
 export class Tag {

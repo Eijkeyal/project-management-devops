@@ -5,8 +5,8 @@ import {
   ManyToOne,
   JoinColumn,
 } from "typeorm";
-import { Project } from "./project.entity";
-import { File } from "./file.entity";
+import { Project } from "./project.entity.js";
+import { File } from "./file.entity.js";
 
 @Entity("project_files")
 export class ProjectFile {

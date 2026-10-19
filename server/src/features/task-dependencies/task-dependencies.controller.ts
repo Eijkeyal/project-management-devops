@@ -1,8 +1,8 @@
 import type { Request, Response, NextFunction } from "express";
-import type { ApiResponse } from "../../shared/types";
-import type { TaskDependencyResponse, CreateTaskDependencyDto } from "./task-dependencies.dto";
-import { taskDependencyService } from "./task-dependencies.service";
-import { HttpError } from "../../shared/middleware/error.middleware";
+import type { ApiResponse } from "../../shared/types/index.js";
+import type { TaskDependencyResponse, CreateTaskDependencyDto } from "./task-dependencies.dto.js";
+import { taskDependencyService } from "./task-dependencies.service.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
 
 export async function findDependenciesForTask(
   req: Request<{ taskId: string }>,

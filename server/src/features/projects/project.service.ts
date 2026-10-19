@@ -1,19 +1,19 @@
-import { AppDataSource } from "../../shared/db/data-source";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import { Project } from "../../entities/project.entity";
-import { ProjectMember } from "../../entities/project-member.entity";
-import { User } from "../../entities/user.entity";
-import { Task } from "../../entities/task.entity";
-import { File } from "../../entities/file.entity";
-import { ProjectFile } from "../../entities/project-file.entity";
-import { ActivityLog } from "../../entities/activity-log.entity";
-import { Notification } from "../../entities/notification.entity";
+import { AppDataSource } from "../../shared/db/data-source.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import { Project } from "../../entities/project.entity.js";
+import { ProjectMember } from "../../entities/project-member.entity.js";
+import { User } from "../../entities/user.entity.js";
+import { Task } from "../../entities/task.entity.js";
+import { File } from "../../entities/file.entity.js";
+import { ProjectFile } from "../../entities/project-file.entity.js";
+import { ActivityLog } from "../../entities/activity-log.entity.js";
+import { Notification } from "../../entities/notification.entity.js";
 import {
   CreateProjectDto,
   UpdateProjectDto,
   ProjectQueryDto,
   AddProjectMemberDto,
-} from "./project.dto";
+} from "./project.dto.js";
 
 const VALID_STATUSES = [
   "Planned",

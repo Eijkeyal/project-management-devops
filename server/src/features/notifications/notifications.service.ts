@@ -1,8 +1,8 @@
-import { getRepo } from "../../shared/db/repositories";
-import { Notification } from "../../entities/notification.entity";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import type { NotificationQueryDto } from "./notifications.dto";
-import type { PaginatedResponse } from "../../shared/types";
+import { getRepo } from "../../shared/db/repositories.js";
+import { Notification } from "../../entities/notification.entity.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import type { NotificationQueryDto } from "./notifications.dto.js";
+import type { PaginatedResponse } from "../../shared/types/index.js";
 export class NotificationsService {
   private repo() {
     return getRepo(Notification);

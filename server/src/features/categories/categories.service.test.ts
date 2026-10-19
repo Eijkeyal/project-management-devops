@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { CategoriesService } from "./categories.service";
-import type { Category } from "../../entities/category.entity";
-import type { ContentCategory } from "../../entities/content-category.entity";
+import { CategoriesService } from "./categories.service.js";
+import type { Category } from "../../entities/category.entity.js";
+import type { ContentCategory } from "../../entities/content-category.entity.js";
 
 // The duplicate-name check goes through a query builder, so it gets its own
 // chainable mock: where()/andWhere() return the builder, getOne() is what each

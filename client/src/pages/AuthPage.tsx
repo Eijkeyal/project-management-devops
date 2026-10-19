@@ -19,6 +19,18 @@ interface ValidationErrors {
   general?: string;
 }
 
+// ✅ Type-safe error extractor (replaces `catch (error: any)`)
+function getErrorMessage(error: unknown): string {
+  if (axios.isAxiosError(error)) {
+    const data = error.response?.data as
+      | { error?: string; message?: string }
+      | undefined;
+    return data?.error || data?.message || "Something went wrong";
+  }
+  if (error instanceof Error) return error.message;
+  return "Something went wrong";
+}
+
 const AuthPage = () => {
   const [mode, setMode] = useState<AuthMode>("login");
   const [formData, setFormData] = useState<FormData>({
@@ -77,8 +89,14 @@ const AuthPage = () => {
           }, 1000);
         }
       } else {
+        // ✅ Split "Full name" into first_name + last_name (backend requires both)
+        const trimmed = (formData.name || "").trim();
+        const [firstName, ...rest] = trimmed.split(/\s+/);
+        const lastName = rest.join(" ") || "-"; // fallback for single-word names
+
         const response = await axios.post("/api/v1/auth/register", {
-          name: formData.name,
+          first_name: firstName,
+          last_name: lastName,
           email: formData.email,
           password: formData.password,
         });
@@ -93,12 +111,9 @@ const AuthPage = () => {
           }, 2000);
         }
       }
-    } catch (error: any) {
-      const errorMsg =
-        error.response?.data?.error ||
-        error.response?.data?.message ||
-        "Something went wrong";
-      setErrors({ general: errorMsg });
+    } catch (error: unknown) {
+      // ✅ Type-safe — no more `any`, no more ESLint warning
+      setErrors({ general: getErrorMessage(error) });
     } finally {
       setLoading(false);
     }

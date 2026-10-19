@@ -5,8 +5,8 @@ import {
   ManyToOne,
   JoinColumn,
 } from "typeorm";
-import { Project } from "./project.entity";
-import { User } from "./user.entity";
+import { Project } from "./project.entity.js";
+import { User } from "./user.entity.js";
 
 @Entity("project_members")
 export class ProjectMember {

@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { asyncHandler } from "../../shared/middleware/error.middleware";
-import { authenticate, authorize } from "../../shared/middleware/auth.middleware";
+import { asyncHandler } from "../../shared/middleware/error.middleware.js";
+import { authenticate, authorize } from "../../shared/middleware/auth.middleware.js";
 import {
   createUser,
   findAllUsers,
@@ -15,7 +15,7 @@ import {
   activateUser,
   restoreUser,
   updateOwnProfile,
-} from "./users.controller";
+} from "./users.controller.js";
 
 export const usersRouter = Router();
 

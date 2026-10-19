@@ -1,4 +1,4 @@
-import { AppDataSource } from "./src/shared/db/data-source";
+import { AppDataSource } from "./src/shared/db/data-source.js";
 
 await AppDataSource.initialize();
 console.log("Migrations found:", AppDataSource.migrations.map((m) => m.name));

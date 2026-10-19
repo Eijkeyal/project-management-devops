@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { authenticate } from "../../shared/middleware/auth.middleware";
-import { uploadSingle } from "../../shared/middleware/upload.middleware";
+import { authenticate } from "../../shared/middleware/auth.middleware.js";
+import { uploadSingle } from "../../shared/middleware/upload.middleware.js";
 import {
   uploadFile,
   uploadAvatar,
@@ -9,7 +9,7 @@ import {
   listContentFiles,
   softDeleteFile,
   streamFile,
-} from "./files.controller";
+} from "./files.controller.js";
 
 const router = Router();
 

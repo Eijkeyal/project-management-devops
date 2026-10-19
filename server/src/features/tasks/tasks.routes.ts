@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { asyncHandler } from "../../shared/middleware/error.middleware";
-import { authenticate, authorize } from "../../shared/middleware/auth.middleware";
+import { asyncHandler } from "../../shared/middleware/error.middleware.js";
+import { authenticate, authorize } from "../../shared/middleware/auth.middleware.js";
 import {
   findAllTasksForProject,
   findOneTask,
@@ -10,7 +10,7 @@ import {
   updateTaskStatus,
   assignTask,
   removeTask,
-} from "./tasks.controller";
+} from "./tasks.controller.js";
 
 export const tasksRouter = Router();
 

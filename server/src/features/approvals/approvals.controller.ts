@@ -1,13 +1,13 @@
 import type { Response, NextFunction } from "express";
-import type { AuthRequest } from "../../shared/middleware/auth.middleware";
-import type { ApiResponse } from "../../shared/types";
+import type { AuthRequest } from "../../shared/middleware/auth.middleware.js";
+import type { ApiResponse } from "../../shared/types/index.js";
 import type {
   ApprovalResponse,
   ApproveDto,
   RejectDto,
   SubmitForApprovalDto,
-} from "./approvals.dto";
-import { approvalsService } from "./approvals.service";
+} from "./approvals.dto.js";
+import { approvalsService } from "./approvals.service.js";
 
 export async function submitForApproval(
   req: AuthRequest,

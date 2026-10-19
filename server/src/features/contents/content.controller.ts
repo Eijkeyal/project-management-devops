@@ -1,14 +1,14 @@
 import type { Request, Response, NextFunction } from "express";
-import type { ApiResponse } from "../../shared/types";
+import type { ApiResponse } from "../../shared/types/index.js";
 import type {
   ContentResponse,
   CreateContentDto,
   UpdateContentDto,
   DecideApprovalDto,
-} from "./content.dto";
-import { contentService } from "./content.service";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import { AuthRequest } from "../../shared/middleware/auth.middleware";
+} from "./content.dto.js";
+import { contentService } from "./content.service.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import { AuthRequest } from "../../shared/middleware/auth.middleware.js";
 
 export async function findAllContent(
   req: Request,

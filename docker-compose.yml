@@ -1,13 +1,22 @@
 services:
   server:
-    build: ./server
-    env_file: ./server/.env            # DATABASE_URL, JWT secrets, SMTP...
-    environment:
-      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
-    volumes: [uploads:/app/uploads]    # uploaded files live on disk
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: pms-server
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
+    ports:
+      - "5001:5001"
+
   client:
-    build: ./client
-    ports: ["3000:80"]
-    depends_on: [server]
-volumes:
-  uploads:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: pms-client
+    restart: unless-stopped
+    depends_on:
+      - server
+    ports:
+      - "80:80"

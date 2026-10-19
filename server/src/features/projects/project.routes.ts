@@ -9,9 +9,9 @@ import {
   addProjectMember,
   removeProjectMember,
   getProjectDashboard,
-} from "./project.controller";
+} from "./project.controller.js";
 
-import { authenticate } from "../../shared/middleware/auth.middleware";
+import { authenticate } from "../../shared/middleware/auth.middleware.js";
 
 const projectRouter = Router();
 

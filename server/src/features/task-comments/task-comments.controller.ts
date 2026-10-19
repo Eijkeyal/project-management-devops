@@ -1,13 +1,13 @@
 import type { Request, Response, NextFunction } from "express";
-import type { ApiResponse } from "../../shared/types";
+import type { ApiResponse } from "../../shared/types/index.js";
 import type {
   TaskCommentResponse,
   CreateTaskCommentDto,
   UpdateTaskCommentDto,
-} from "./task-comments.dto";
-import { taskCommentService } from "./task-comments.service";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import { AuthRequest } from "../../shared/middleware/auth.middleware";
+} from "./task-comments.dto.js";
+import { taskCommentService } from "./task-comments.service.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import { AuthRequest } from "../../shared/middleware/auth.middleware.js";
 
 export async function findCommentsForTask(
   req: Request<{ taskId: string }>,

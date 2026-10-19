@@ -1,11 +1,11 @@
 // server/src/features/tasks/tasks.service.test.ts
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import { TaskService } from "./tasks.service";
-import { Task } from "../../entities/task.entity";
-import { Notification } from "../../entities/notification.entity";
-import { ActivityLog } from "../../entities/activity-log.entity";
-import type { Task as TaskType } from "../../entities/task.entity";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import { TaskService } from "./tasks.service.js";
+import { Task } from "../../entities/task.entity.js";
+import { Notification } from "../../entities/notification.entity.js";
+import { ActivityLog } from "../../entities/activity-log.entity.js";
+import type { Task as TaskType } from "../../entities/task.entity.js";
 
 const mockTaskRepo = {
   findOne: vi.fn(),

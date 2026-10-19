@@ -7,8 +7,8 @@ import {
   ManyToOne,
   JoinColumn,
 } from "typeorm";
-import { Task } from "./task.entity";
-import { User } from "./user.entity";
+import { Task } from "./task.entity.js";
+import { User } from "./user.entity.js";
 
 @Entity("task_comments")
 export class TaskComment {

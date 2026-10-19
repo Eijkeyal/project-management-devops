@@ -1,9 +1,9 @@
 // server/src/features/contents/content.service.test.ts
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import { ContentService } from "./content.service";
-import type { Content } from "../../entities/content.entity";
-import { ContentStatus } from "../../entities/approval.entity";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import { ContentService } from "./content.service.js";
+import type { Content } from "../../entities/content.entity.js";
+import { ContentStatus } from "../../entities/approval.entity.js";
 
 const mockRepo = {
   findOne: vi.fn(),

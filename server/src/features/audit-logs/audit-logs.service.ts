@@ -1,7 +1,7 @@
-import { AppDataSource } from "../../shared/db/data-source";
-import { ActivityLog } from "../../entities/activity-log.entity";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import { ListAuditLogsQuery } from "./audit-logs.dto";
+import { AppDataSource } from "../../shared/db/data-source.js";
+import { ActivityLog } from "../../entities/activity-log.entity.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import { ListAuditLogsQuery } from "./audit-logs.dto.js";
 
 export class AuditLogsService {
   private repo = AppDataSource.getRepository(ActivityLog);

@@ -1,4 +1,4 @@
-import type { ApprovalStatus, PublishMode } from "../../entities/approval.entity";
+import type { ApprovalStatus, PublishMode } from "../../entities/approval.entity.js";
 
 export interface ApprovalResponse {
   approval_id: string;

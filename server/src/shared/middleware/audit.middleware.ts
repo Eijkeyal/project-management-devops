@@ -1,7 +1,7 @@
 import type { Response, NextFunction } from "express";
-import type { AuthRequest } from "./auth.middleware";
-import { AppDataSource } from "../db/data-source";
-import { ActivityLog, AuditSeverity } from "../../entities/activity-log.entity";
+import type { AuthRequest } from "./auth.middleware.js";
+import { AppDataSource } from "../db/data-source.js";
+import { ActivityLog, AuditSeverity } from "../../entities/activity-log.entity.js";
 
 declare global {
   namespace Express {

@@ -1,10 +1,10 @@
 import { ILike } from "typeorm";
-import { BaseCRUDService } from "../../shared/services/base.service";
-import { getRepo } from "../../shared/db/repositories";
-import { Tag } from "../../entities/tag.entity";
-import { ContentTag } from "../../entities/content-tag.entity";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import type { CreateTagDto, UpdateTagDto } from "./tags.dto";
+import { BaseCRUDService } from "../../shared/services/base.service.js";
+import { getRepo } from "../../shared/db/repositories.js";
+import { Tag } from "../../entities/tag.entity.js";
+import { ContentTag } from "../../entities/content-tag.entity.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import type { CreateTagDto, UpdateTagDto } from "./tags.dto.js";
 
 export class TagsService extends BaseCRUDService<
   Tag,

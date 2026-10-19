@@ -1,4 +1,4 @@
-import { AuditSeverity } from "../../entities/activity-log.entity";
+import { AuditSeverity } from "../../entities/activity-log.entity.js";
 
 export interface ListAuditLogsQuery {
   q: string | undefined;

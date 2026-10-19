@@ -1,12 +1,12 @@
 import type { Request, Response, NextFunction } from "express";
-import type { ApiResponse } from "../../shared/types";
-import type { TagResponse, CreateTagDto, UpdateTagDto } from "./tags.dto";
+import type { ApiResponse } from "../../shared/types/index.js";
+import type { TagResponse, CreateTagDto, UpdateTagDto } from "./tags.dto.js";
 import {
   createTagSchema,
   updateTagSchema,
-} from "./tags.dto";
-import { tagsService } from "./tags.service";
-import { HttpError } from "../../shared/middleware/error.middleware";
+} from "./tags.dto.js";
+import { tagsService } from "./tags.service.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
 
 export async function findAllTags(
   req: Request,

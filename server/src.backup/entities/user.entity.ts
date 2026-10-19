@@ -1,0 +1,125 @@
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+  Index,
+} from "typeorm";
+import { Exclude } from "class-transformer";
+import { Role } from "./role.entity";
+import { Project } from "./project.entity";
+import { ProjectMember } from "./project-member.entity";
+import { Content } from "./content.entity";
+import { Task } from "./task.entity";
+import { TaskComment } from "./task-comment.entity";
+import { File } from "./file.entity";
+import { Notification } from "./notification.entity";
+import { ActivityLog } from "./activity-log.entity";
+
+@Entity("users")
+@Index(["status"])
+@Index(["email_verified"])
+@Index(["deleted_at"])
+@Index(["created_at"])
+export class User {
+  @PrimaryGeneratedColumn("uuid")
+  user_id!: string;
+
+  @Column({ type: "uuid" })
+  role_id!: string;
+
+  @Column({ type: "varchar", length: 50 })
+  first_name!: string;
+
+  @Column({ type: "varchar", length: 50 })
+  last_name!: string;
+
+  @Column({ type: "varchar", length: 100, unique: true })
+  email!: string;
+
+  @Exclude()
+  @Column({ type: "varchar", length: 255 })
+  password_hash!: string;
+
+  @Column({ type: "varchar", length: 20, default: "active" })
+  status!: string;
+
+  @Exclude()
+  @Column({ type: "int", default: 0 })
+  failed_login_count!: number;
+
+  @Exclude()
+  @Column({ type: "timestamp", nullable: true })
+  locked_until?: Date;
+
+  @Column({ type: "boolean", default: false })
+  email_verified!: boolean;
+
+  @Exclude()
+  @Column({ type: "varchar", length: 255, nullable: true })
+  verification_token?: string;
+
+  @Exclude()
+  @Column({ type: "timestamp", nullable: true })
+  verification_token_expires?: Date;
+
+  @Exclude()
+  @Column({ type: "varchar", length: 255, nullable: true })
+  password_reset_token?: string;
+
+  @Exclude()
+  @Column({ type: "timestamp", nullable: true })
+  password_reset_expires?: Date;
+
+  @Exclude()
+  @Column({ type: "timestamp", nullable: true })
+  deleted_at?: Date;
+
+  @CreateDateColumn({ type: "timestamp" })
+  created_at!: Date;
+
+  @UpdateDateColumn({ type: "timestamp" })
+  updated_at!: Date;
+
+  @Column({ type: "uuid", nullable: true })
+  avatar_file_id?: string;
+
+  @ManyToOne(() => File, { onDelete: "SET NULL" })
+  @JoinColumn({ name: "avatar_file_id" })
+  avatar?: File;
+
+  @ManyToOne(() => Role, (role) => role.users)
+  @JoinColumn({ name: "role_id" })
+  role!: Role;
+
+  @OneToMany(() => Project, (project) => project.owner)
+  owned_projects!: Project[];
+
+  @OneToMany(() => ProjectMember, (pm) => pm.user)
+  project_memberships!: ProjectMember[];
+
+  @OneToMany(() => Content, (content) => content.author)
+  contents!: Content[];
+
+  @OneToMany(() => Task, (task) => task.assignee)
+  assigned_tasks!: Task[];
+
+  @OneToMany(() => Task, (task) => task.creator)
+  created_tasks!: Task[];
+
+  @OneToMany(() => TaskComment, (tc) => tc.user)
+  task_comments!: TaskComment[];
+
+  @OneToMany(() => File, (file) => file.uploader)
+  uploaded_files!: File[];
+
+  @OneToMany(() => Notification, (n) => n.user)
+  notifications!: Notification[];
+
+  @OneToMany(() => ActivityLog, (al) => al.user)
+  activity_logs!: ActivityLog[];
+}

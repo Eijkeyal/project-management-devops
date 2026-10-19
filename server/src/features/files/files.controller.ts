@@ -1,10 +1,10 @@
 import type { Response, NextFunction } from "express";
-import type { ApiResponse } from "../../shared/types";
-import type { AuthRequest } from "../../shared/middleware/auth.middleware";
-import type { FileResponse } from "./files.dto";
-import { filesService } from "./files.service";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import { resolveFullPath } from "./file.storage";
+import type { ApiResponse } from "../../shared/types/index.js";
+import type { AuthRequest } from "../../shared/middleware/auth.middleware.js";
+import type { FileResponse } from "./files.dto.js";
+import { filesService } from "./files.service.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import { resolveFullPath } from "./file.storage.js";
 
 function requireUserId(req: AuthRequest): string {
   if (!req.user) throw new HttpError(401, "Authentication required");

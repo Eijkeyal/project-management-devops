@@ -1,10 +1,10 @@
 import bcrypt from "bcryptjs";
-import { getRepo } from "../../shared/db/repositories";
-import { User } from "../../entities/user.entity";
-import { RefreshToken } from "../../entities/refresh-token.entity";
-import { Role } from "../../entities/role.entity";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import { emailService } from "../../shared/services/email.service";
+import { getRepo } from "../../shared/db/repositories.js";
+import { User } from "../../entities/user.entity.js";
+import { RefreshToken } from "../../entities/refresh-token.entity.js";
+import { Role } from "../../entities/role.entity.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import { emailService } from "../../shared/services/email.service.js";
 import {
   generateAccessToken,
   generateRefreshToken,
@@ -12,14 +12,14 @@ import {
   hashToken,
   getRefreshTokenExpiration,
   verifyRefreshToken,
-} from "../../shared/utils/jwt.util";
+} from "../../shared/utils/jwt.util.js";
 import type {
   RegisterDto,
   LoginDto,
   AuthResponse,
   UserProfile,
   RefreshResponse,
-} from "./auth.dto";
+} from "./auth.dto.js";
 
 const MAX_FAILED_ATTEMPTS = 5;
 const LOCK_DURATION_MINUTES = 30;

@@ -7,8 +7,8 @@ import {
   JoinColumn,
   Index,
 } from "typeorm";
-import { Content } from "./content.entity";
-import { User } from "./user.entity";
+import { Content } from "./content.entity.js";
+import { User } from "./user.entity.js";
 
 export enum ContentStatus {
   DRAFT = "draft",

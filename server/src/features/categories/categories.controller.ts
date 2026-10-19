@@ -1,12 +1,12 @@
 import type { Request, Response, NextFunction } from "express";
-import type { ApiResponse } from "../../shared/types";
+import type { ApiResponse } from "../../shared/types/index.js";
 import type {
   CategoryResponse,
   CreateCategoryDto,
   UpdateCategoryDto,
-} from "./categories.dto";
-import { categoriesService } from "./categories.service";
-import { HttpError } from "../../shared/middleware/error.middleware";
+} from "./categories.dto.js";
+import { categoriesService } from "./categories.service.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
 
 export async function findAllCategories(
   req: Request,

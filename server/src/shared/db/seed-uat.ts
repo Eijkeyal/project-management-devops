@@ -14,20 +14,20 @@
 // environment: it resets admin@example.com back to Admin@123.
 import "reflect-metadata";
 import bcrypt from "bcryptjs";
-import { AppDataSource } from "./data-source";
-import { Role } from "../../entities/role.entity";
-import { User } from "../../entities/user.entity";
-import { Project } from "../../entities/project.entity";
-import { ProjectMember } from "../../entities/project-member.entity";
-import { Task } from "../../entities/task.entity";
-import { Content } from "../../entities/content.entity";
+import { AppDataSource } from "./data-source.js";
+import { Role } from "../../entities/role.entity.js";
+import { User } from "../../entities/user.entity.js";
+import { Project } from "../../entities/project.entity.js";
+import { ProjectMember } from "../../entities/project-member.entity.js";
+import { Task } from "../../entities/task.entity.js";
+import { Content } from "../../entities/content.entity.js";
 import {
   Approval,
   ApprovalStatus,
   ContentStatus,
   PublishMode,
-} from "../../entities/approval.entity";
-import { generateVerificationToken, hashToken } from "../utils/jwt.util";
+} from "../../entities/approval.entity.js";
+import { generateVerificationToken, hashToken } from "../utils/jwt.util.js";
 
 // Noon local time, so date-only columns never slip a day across time zones.
 function daysFromNow(days: number): Date {

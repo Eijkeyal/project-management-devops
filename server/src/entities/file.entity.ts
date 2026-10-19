@@ -9,10 +9,10 @@ import {
   OneToMany,
   Index,
 } from "typeorm";
-import { User } from "./user.entity";
-import { ProjectFile } from "./project-file.entity";
-import { TaskFile } from "./task-file.entity";
-import { ContentFile } from "./content-file.entity";
+import { User } from "./user.entity.js";
+import { ProjectFile } from "./project-file.entity.js";
+import { TaskFile } from "./task-file.entity.js";
+import { ContentFile } from "./content-file.entity.js";
 
 @Entity("files")
 export class File {

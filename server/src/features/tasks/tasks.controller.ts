@@ -1,15 +1,15 @@
 import type { Request, Response, NextFunction } from "express";
-import type { ApiResponse } from "../../shared/types";
+import type { ApiResponse } from "../../shared/types/index.js";
 import type {
   TaskResponse,
   CreateTaskDto,
   UpdateTaskDto,
   UpdateTaskStatusDto,
   AssignTaskDto,
-} from "./tasks.dto";
-import { taskService } from "./tasks.service";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import { AuthRequest } from "../../shared/middleware/auth.middleware";
+} from "./tasks.dto.js";
+import { taskService } from "./tasks.service.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import { AuthRequest } from "../../shared/middleware/auth.middleware.js";
 
 function withOverdue(task: any): TaskResponse {
   const isOverdue =

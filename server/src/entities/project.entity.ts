@@ -9,12 +9,12 @@ import {
   JoinColumn,
 } from "typeorm";
 
-import { User } from "./user.entity";
-import { ProjectMember } from "./project-member.entity";
-import { Task } from "./task.entity";
-import { Content } from "./content.entity";
-import { ProjectFile } from "./project-file.entity";
-import { ActivityLog } from "./activity-log.entity";
+import { User } from "./user.entity.js";
+import { ProjectMember } from "./project-member.entity.js";
+import { Task } from "./task.entity.js";
+import { Content } from "./content.entity.js";
+import { ProjectFile } from "./project-file.entity.js";
+import { ActivityLog } from "./activity-log.entity.js";
 
 @Entity("projects")
 export class Project {

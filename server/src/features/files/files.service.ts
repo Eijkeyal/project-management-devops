@@ -1,20 +1,20 @@
 import crypto from "crypto";
 import { IsNull } from "typeorm";
-import { File } from "../../entities/file.entity";
-import { ProjectFile } from "../../entities/project-file.entity";
-import { TaskFile } from "../../entities/task-file.entity";
-import { ContentFile } from "../../entities/content-file.entity";
-import { Project } from "../../entities/project.entity";
-import { ProjectMember } from "../../entities/project-member.entity";
-import { Task } from "../../entities/task.entity";
-import { Content } from "../../entities/content.entity";
-import { User } from "../../entities/user.entity";
-import { BaseCRUDService } from "../../shared/services/base.service";
-import { getRepo } from "../../shared/db/repositories";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import type { FileResponse } from "./files.dto";
-import { validateAttachment, validateAvatar } from "./files.validation";
-import * as storage from "./file.storage";
+import { File } from "../../entities/file.entity.js";
+import { ProjectFile } from "../../entities/project-file.entity.js";
+import { TaskFile } from "../../entities/task-file.entity.js";
+import { ContentFile } from "../../entities/content-file.entity.js";
+import { Project } from "../../entities/project.entity.js";
+import { ProjectMember } from "../../entities/project-member.entity.js";
+import { Task } from "../../entities/task.entity.js";
+import { Content } from "../../entities/content.entity.js";
+import { User } from "../../entities/user.entity.js";
+import { BaseCRUDService } from "../../shared/services/base.service.js";
+import { getRepo } from "../../shared/db/repositories.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import type { FileResponse } from "./files.dto.js";
+import { validateAttachment, validateAvatar } from "./files.validation.js";
+import * as storage from "./file.storage.js";
 
 export class FilesService extends BaseCRUDService<File> {
   constructor() {

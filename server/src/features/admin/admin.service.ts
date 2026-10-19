@@ -1,10 +1,10 @@
-import { AppDataSource } from "../../shared/db/data-source";
-import { User } from "../../entities/user.entity";
-import { Project } from "../../entities/project.entity";
-import { Task } from "../../entities/task.entity";
-import { Content } from "../../entities/content.entity";
+import { AppDataSource } from "../../shared/db/data-source.js";
+import { User } from "../../entities/user.entity.js";
+import { Project } from "../../entities/project.entity.js";
+import { Task } from "../../entities/task.entity.js";
+import { Content } from "../../entities/content.entity.js";
 import { IsNull, Not, MoreThan } from "typeorm";
-import { ContentStatus } from "../../entities/approval.entity";
+import { ContentStatus } from "../../entities/approval.entity.js";
 
 export class AdminService {
   async getDashboardStats() {

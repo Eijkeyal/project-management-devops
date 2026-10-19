@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { AuditLogsController } from "./audit-logs.controller";
-import { authenticate, authorize } from "../../shared/middleware/auth.middleware";
-import { validateQuery } from "../../shared/middleware/validate.middleware";
-import { listAuditLogsQuerySchema } from "./audit-logs.dto";
+import { AuditLogsController } from "./audit-logs.controller.js";
+import { authenticate, authorize } from "../../shared/middleware/auth.middleware.js";
+import { validateQuery } from "../../shared/middleware/validate.middleware.js";
+import { listAuditLogsQuerySchema } from "./audit-logs.dto.js";
 
 const router = Router();
 const ctrl = new AuditLogsController();

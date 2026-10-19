@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { AuditLogsService } from "./audit-logs.service";
-import { ListAuditLogsQuery } from "./audit-logs.dto";
+import { AuditLogsService } from "./audit-logs.service.js";
+import { ListAuditLogsQuery } from "./audit-logs.dto.js";
 
 const service = new AuditLogsService();
 

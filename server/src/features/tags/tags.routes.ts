@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { asyncHandler } from "../../shared/middleware/error.middleware";
-import { authenticate } from "../../shared/middleware/auth.middleware";
+import { asyncHandler } from "../../shared/middleware/error.middleware.js";
+import { authenticate } from "../../shared/middleware/auth.middleware.js";
 import {
   findAllTags,
   findOneTag,
@@ -10,7 +10,7 @@ import {
   attachTagToContent,
   detachTagFromContent,
   listTagsForContent,
-} from "./tags.controller";
+} from "./tags.controller.js";
 
 export const tagsRouter = Router();
 

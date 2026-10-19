@@ -1,6 +1,6 @@
 import path from "path";
 import { fileTypeFromBuffer } from "file-type";
-import { HttpError } from "../../shared/middleware/error.middleware";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
 
 const ATTACHMENT_MIMES: Record<string, string[]> = {
   "image/jpeg": ["jpg", "jpeg"],

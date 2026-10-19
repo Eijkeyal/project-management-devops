@@ -1,10 +1,10 @@
-import { BaseCRUDService } from "../../shared/services/base.service";
-import { getRepo } from "../../shared/db/repositories";
-import { Category } from "../../entities/category.entity";
-import { ContentCategory } from "../../entities/content-category.entity";
-import { Content } from "../../entities/content.entity";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import type { CreateCategoryDto, UpdateCategoryDto } from "./categories.dto";
+import { BaseCRUDService } from "../../shared/services/base.service.js";
+import { getRepo } from "../../shared/db/repositories.js";
+import { Category } from "../../entities/category.entity.js";
+import { ContentCategory } from "../../entities/content-category.entity.js";
+import { Content } from "../../entities/content.entity.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import type { CreateCategoryDto, UpdateCategoryDto } from "./categories.dto.js";
 
 // Safety bound when walking up the parent chain, in case bad data ever
 // contains a loop.

@@ -3,28 +3,28 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { instanceToPlain } from "class-transformer";
-import { AppDataSource } from "./src/shared/db/data-source";
-import { errorHandler, notFoundHandler } from "./src/shared/middleware/error.middleware";
+import { AppDataSource } from "./src/shared/db/data-source.js";
+import { errorHandler, notFoundHandler } from "./src/shared/middleware/error.middleware.js";
 
 import swaggerUi from "swagger-ui-express";
-import { swaggerSpec } from "./src/shared/swagger/swagger.setup";
+import { swaggerSpec } from "./src/shared/swagger/swagger.setup.js";
 
-import { authRouter } from "./src/features/authentication/auth.routes";
-import { contentsRouter } from "./src/features/contents/content.routes";
-import { usersRouter } from "./src/features/users/users.routes";
-import { projectRouter } from "./src/features/projects/project.routes";
-import { tagsRouter } from "./src/features/tags/tags.routes";
-import { categoriesRouter } from "./src/features/categories/categories.routes";
-import { tasksRouter } from "./src/features/tasks/tasks.routes";
-import { taskCommentsRouter } from "./src/features/task-comments/task-comments.routes";
-import { taskDependenciesRouter } from "./src/features/task-dependencies/task-dependencies.routes";
-import { notificationsRouter } from "./src/features/notifications/notifications.routes";
-import { rolesRouter } from "./src/features/roles/roles.routes";
-import { adminRouter } from "./src/features/admin/admin.routes";
-import filesRoutes from "./src/features/files/files.routes";
-import { approvalsRouter } from "./src/features/approvals/approvals.routes";
-import { auditLogsRouter } from "./src/features/audit-logs/audit.routes";
-import { startPublishScheduler } from "./src/shared/jobs/publish-scheduled.jobs";
+import { authRouter } from "./src/features/authentication/auth.routes.js";
+import { contentsRouter } from "./src/features/contents/content.routes.js";
+import { usersRouter } from "./src/features/users/users.routes.js";
+import { projectRouter } from "./src/features/projects/project.routes.js";
+import { tagsRouter } from "./src/features/tags/tags.routes.js";
+import { categoriesRouter } from "./src/features/categories/categories.routes.js";
+import { tasksRouter } from "./src/features/tasks/tasks.routes.js";
+import { taskCommentsRouter } from "./src/features/task-comments/task-comments.routes.js";
+import { taskDependenciesRouter } from "./src/features/task-dependencies/task-dependencies.routes.js";
+import { notificationsRouter } from "./src/features/notifications/notifications.routes.js";
+import { rolesRouter } from "./src/features/roles/roles.routes.js";
+import { adminRouter } from "./src/features/admin/admin.routes.js";
+import filesRoutes from "./src/features/files/files.routes.js";
+import { approvalsRouter } from "./src/features/approvals/approvals.routes.js";
+import { auditLogsRouter } from "./src/features/audit-logs/audit.routes.js";
+import { startPublishScheduler } from "./src/shared/jobs/publish-scheduled.jobs.js";
 
 dotenv.config();
 

@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
-import type { AuthRequest } from "../../shared/middleware/auth.middleware";
-import type { ApiResponse } from "../../shared/types";
-import { authService } from "./auth.service";
+import type { AuthRequest } from "../../shared/middleware/auth.middleware.js";
+import type { ApiResponse } from "../../shared/types/index.js";
+import { authService } from "./auth.service.js";
 import type {
   RegisterDto,
   LoginDto,
@@ -13,7 +13,7 @@ import type {
   AuthResponse,
   RefreshResponse,
   MeResponse,
-} from "./auth.dto";
+} from "./auth.dto.js";
 
 export async function register(
   req: Request<unknown, unknown, RegisterDto>,

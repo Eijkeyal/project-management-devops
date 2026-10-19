@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction, RequestHandler } from "express";
 import { ZodError } from "zod";
-import type { ApiResponse } from "../types";
+import type { ApiResponse } from "../types/index.js";
 
 export class HttpError extends Error {
   public readonly statusCode: number;

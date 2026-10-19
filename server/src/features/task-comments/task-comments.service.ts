@@ -1,11 +1,11 @@
-import { BaseCRUDService } from "../../shared/services/base.service";
-import { getRepo } from "../../shared/db/repositories";
-import { TaskComment } from "../../entities/task-comment.entity";
-import { Task } from "../../entities/task.entity";
-import { Notification } from "../../entities/notification.entity";
-import { ActivityLog } from "../../entities/activity-log.entity";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import type { CreateTaskCommentDto, UpdateTaskCommentDto } from "./task-comments.dto";
+import { BaseCRUDService } from "../../shared/services/base.service.js";
+import { getRepo } from "../../shared/db/repositories.js";
+import { TaskComment } from "../../entities/task-comment.entity.js";
+import { Task } from "../../entities/task.entity.js";
+import { Notification } from "../../entities/notification.entity.js";
+import { ActivityLog } from "../../entities/activity-log.entity.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import type { CreateTaskCommentDto, UpdateTaskCommentDto } from "./task-comments.dto.js";
 
 export class TaskCommentService extends BaseCRUDService<
   TaskComment,

@@ -6,11 +6,11 @@
 // Safe to re-run — it skips anything that already exists by email/name.
 import "reflect-metadata";
 import bcrypt from "bcryptjs";
-import { AppDataSource } from "../shared/db/data-source";
-import { Role } from "../entities/role.entity";
-import { User } from "../entities/user.entity";
-import { Project } from "../entities/project.entity";
-import { ProjectMember } from "../entities/project-member.entity";
+import { AppDataSource } from "../shared/db/data-source.js";
+import { Role } from "../entities/role.entity.js";
+import { User } from "../entities/user.entity.js";
+import { Project } from "../entities/project.entity.js";
+import { ProjectMember } from "../entities/project-member.entity.js";
 
 async function upsertUser(
   email: string,

@@ -1,20 +1,20 @@
-import { AppDataSource } from "../../shared/db/data-source";
-import { BaseCRUDService } from "../../shared/services/base.service";
-import { getRepo } from "../../shared/db/repositories";
+import { AppDataSource } from "../../shared/db/data-source.js";
+import { BaseCRUDService } from "../../shared/services/base.service.js";
+import { getRepo } from "../../shared/db/repositories.js";
 import {
   Approval,
   ApprovalStatus,
   PublishMode,
   ContentStatus,
-} from "../../entities/approval.entity";
-import { Content } from "../../entities/content.entity";
-import { ActivityLog } from "../../entities/activity-log.entity";
-import { Notification } from "../../entities/notification.entity";
-import { User } from "../../entities/user.entity";
-import { Role } from "../../entities/role.entity";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import type { PaginationParams, PaginatedResponse } from "../../shared/types";
-import type { ApproveDto, RejectDto, SubmitForApprovalDto } from "./approvals.dto";
+} from "../../entities/approval.entity.js";
+import { Content } from "../../entities/content.entity.js";
+import { ActivityLog } from "../../entities/activity-log.entity.js";
+import { Notification } from "../../entities/notification.entity.js";
+import { User } from "../../entities/user.entity.js";
+import { Role } from "../../entities/role.entity.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import type { PaginationParams, PaginatedResponse } from "../../shared/types/index.js";
+import type { ApproveDto, RejectDto, SubmitForApprovalDto } from "./approvals.dto.js";
 
 export class ApprovalsService extends BaseCRUDService<Approval> {
   constructor() {

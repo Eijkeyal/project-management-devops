@@ -5,7 +5,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from "typeorm";
-import { Task } from "./task.entity";
+import { Task } from "./task.entity.js";
 
 @Entity("task_dependencies")
 export class TaskDependency {

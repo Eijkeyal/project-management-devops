@@ -1,9 +1,9 @@
 import type { Request, Response, NextFunction } from "express";
-import type { ApiResponse } from "../../shared/types";
-import type { NotificationResponse } from "./notifications.dto";
-import { notificationsService } from "./notifications.service";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import { AuthRequest } from "../../shared/middleware/auth.middleware";
+import type { ApiResponse } from "../../shared/types/index.js";
+import type { NotificationResponse } from "./notifications.dto.js";
+import { notificationsService } from "./notifications.service.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import { AuthRequest } from "../../shared/middleware/auth.middleware.js";
 
 export async function findMyNotifications(
   req: Request,

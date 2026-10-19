@@ -1,6 +1,6 @@
 // server/src/features/contents/contents.routes.ts
 import { Router } from "express";
-import { asyncHandler } from "../../shared/middleware/error.middleware";
+import { asyncHandler } from "../../shared/middleware/error.middleware.js";
 import {
   findAllContent,
   findOneContent,
@@ -10,8 +10,8 @@ import {
   submitContentForApproval,
   decideContentApproval,
   publishContent,
-} from "./content.controller";
-import { authenticate } from "../../shared/middleware/auth.middleware";
+} from "./content.controller.js";
+import { authenticate } from "../../shared/middleware/auth.middleware.js";
 
 export const contentsRouter = Router();
 

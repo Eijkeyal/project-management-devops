@@ -1,13 +1,13 @@
-import { BaseCRUDService } from "../../shared/services/base.service";
-import { getRepo } from "../../shared/db/repositories";
-import { Content } from "../../entities/content.entity";
+import { BaseCRUDService } from "../../shared/services/base.service.js";
+import { getRepo } from "../../shared/db/repositories.js";
+import { Content } from "../../entities/content.entity.js";
 import {
   Approval,
   ApprovalStatus,
   ContentStatus,
-} from "../../entities/approval.entity";
-import { HttpError } from "../../shared/middleware/error.middleware";
-import type { CreateContentDto, UpdateContentDto } from "./content.dto";
+} from "../../entities/approval.entity.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
+import type { CreateContentDto, UpdateContentDto } from "./content.dto.js";
 
 export class ContentService extends BaseCRUDService<
   Content,

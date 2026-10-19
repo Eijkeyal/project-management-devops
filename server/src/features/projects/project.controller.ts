@@ -7,12 +7,12 @@ import {
   addProjectMemberSchema,
   projectIdParamSchema,
   projectMemberParamsSchema,
-} from "./project.dto";
+} from "./project.dto.js";
 
-import { projectService } from "./project.service";
+import { projectService } from "./project.service.js";
 
-import type { AuthRequest } from "../../shared/middleware/auth.middleware";
-import { HttpError } from "../../shared/middleware/error.middleware";
+import type { AuthRequest } from "../../shared/middleware/auth.middleware.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
 
 function getAuthenticatedUser(req: AuthRequest) {
   if (!req.user?.userId || !req.user?.roleName) {

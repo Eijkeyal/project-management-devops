@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import crypto from "crypto";
-import { HttpError } from "../../shared/middleware/error.middleware";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
 
 const ROOT = path.resolve(process.env.UPLOAD_DIR ?? "./uploads");
 

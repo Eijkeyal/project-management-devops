@@ -8,8 +8,8 @@ import {
   JoinColumn,
 } from "typeorm";
 
-import { Project } from "./project.entity";
-import { User } from "./user.entity";
+import { Project } from "./project.entity.js";
+import { User } from "./user.entity.js";
 
 export enum AuditSeverity {
   INFO = "info",

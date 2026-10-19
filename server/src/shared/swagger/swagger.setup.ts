@@ -1,25 +1,25 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 
-import { swaggerConfig } from './swagger.config';
-import { sharedSchemas } from './swagger.schemas';
-import { sharedResponses } from './swagger.responses';
-import { sharedParameters } from './swagger.parameters';
+import { swaggerConfig } from './swagger.config.js';
+import { sharedSchemas } from './swagger.schemas.js';
+import { sharedResponses } from './swagger.responses.js';
+import { sharedParameters } from './swagger.parameters.js';
 
-import { adminPaths } from '../../features/admin/admin.swagger';
-import { approvalPaths, approvalSchemas } from '../../features/approvals/approval.swagger';
-import { auditLogPaths, auditLogSchemas } from '../../features/audit-logs/auditLog.swagger';
-import { authPaths, authSchemas } from '../../features/authentication/auth.swagger';
-import { categoryPaths, categorySchemas } from '../../features/categories/category.swagger';
-import { contentPaths, contentSchemas } from '../../features/contents/content.swagger';
-import { filePaths, fileSchemas } from '../../features/files/file.swagger';
-import { notificationPaths, notificationSchemas } from '../../features/notifications/notification.swagger';
-import { projectPaths, projectSchemas } from '../../features/projects/project.swagger';
-import { rolePaths, roleSchemas } from '../../features/roles/role.swagger';
-import { tagPaths, tagSchemas } from '../../features/tags/tag.swagger';
-import { taskCommentPaths, taskCommentSchemas } from '../../features/task-comments/taskComment.swagger';
-import { taskDependencyPaths, taskDependencySchemas } from '../../features/task-dependencies/taskDependency.swagger';
-import { taskPaths, taskSchemas } from '../../features/tasks/task.swagger';
-import { userPaths, userSchemas } from '../../features/users/user.swagger';
+import { adminPaths } from '../../features/admin/admin.swagger.js';
+import { approvalPaths, approvalSchemas } from '../../features/approvals/approval.swagger.js';
+import { auditLogPaths, auditLogSchemas } from '../../features/audit-logs/auditLog.swagger.js';
+import { authPaths, authSchemas } from '../../features/authentication/auth.swagger.js';
+import { categoryPaths, categorySchemas } from '../../features/categories/category.swagger.js';
+import { contentPaths, contentSchemas } from '../../features/contents/content.swagger.js';
+import { filePaths, fileSchemas } from '../../features/files/file.swagger.js';
+import { notificationPaths, notificationSchemas } from '../../features/notifications/notification.swagger.js';
+import { projectPaths, projectSchemas } from '../../features/projects/project.swagger.js';
+import { rolePaths, roleSchemas } from '../../features/roles/role.swagger.js';
+import { tagPaths, tagSchemas } from '../../features/tags/tag.swagger.js';
+import { taskCommentPaths, taskCommentSchemas } from '../../features/task-comments/taskComment.swagger.js';
+import { taskDependencyPaths, taskDependencySchemas } from '../../features/task-dependencies/taskDependency.swagger.js';
+import { taskPaths, taskSchemas } from '../../features/tasks/task.swagger.js';
+import { userPaths, userSchemas } from '../../features/users/user.swagger.js';
 
 const paths = {
   ...adminPaths,

@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { asyncHandler } from "../../shared/middleware/error.middleware";
-import { authenticate } from "../../shared/middleware/auth.middleware";
+import { asyncHandler } from "../../shared/middleware/error.middleware.js";
+import { authenticate } from "../../shared/middleware/auth.middleware.js";
 import {
   findDependenciesForTask,
   createTaskDependency,
   removeTaskDependency,
-} from "./task-dependencies.controller";
+} from "./task-dependencies.controller.js";
 
 export const taskDependenciesRouter = Router();
 

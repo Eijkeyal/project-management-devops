@@ -8,11 +8,11 @@ import {
   JoinColumn,
   OneToMany,
 } from "typeorm";
-import { Project } from "./project.entity";
-import { User } from "./user.entity";
-import { TaskComment } from "./task-comment.entity";
-import { TaskDependency } from "./task-dependency.entity";
-import { TaskFile } from "./task-file.entity";
+import { Project } from "./project.entity.js";
+import { User } from "./user.entity.js";
+import { TaskComment } from "./task-comment.entity.js";
+import { TaskDependency } from "./task-dependency.entity.js";
+import { TaskFile } from "./task-file.entity.js";
 
 @Entity("tasks")
 export class Task {

@@ -1,8 +1,8 @@
 import "reflect-metadata";
-import { AppDataSource } from "./data-source";
-import { Role } from "../../entities/role.entity";
+import { AppDataSource } from "./data-source.js";
+import { Role } from "../../entities/role.entity.js";
 import bcrypt from "bcryptjs";
-import { User } from "../../entities/user.entity";
+import { User } from "../../entities/user.entity.js";
 
 async function seed() {
   try {

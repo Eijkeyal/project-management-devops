@@ -1,5 +1,5 @@
-import { BaseCRUDService } from "../../shared/services/base.service";
-import { Role } from "../../entities/role.entity";
+import { BaseCRUDService } from "../../shared/services/base.service.js";
+import { Role } from "../../entities/role.entity.js";
 
 interface CreateRoleDto {
   name: string;

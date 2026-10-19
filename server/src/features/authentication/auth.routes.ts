@@ -1,14 +1,14 @@
 import { Router } from "express";
 
-import { asyncHandler } from "../../shared/middleware/error.middleware";
-import { authenticate } from "../../shared/middleware/auth.middleware";
-import { requireParams } from "../../shared/middleware/validate.middleware";
+import { asyncHandler } from "../../shared/middleware/error.middleware.js";
+import { authenticate } from "../../shared/middleware/auth.middleware.js";
+import { requireParams } from "../../shared/middleware/validate.middleware.js";
 
 import {
   loginRateLimit,
   passwordResetRateLimit,
   registrationRateLimit,
-} from "../../shared/middleware/rate-limit.middleware";
+} from "../../shared/middleware/rate-limit.middleware.js";
 
 import {
   register,
@@ -20,7 +20,7 @@ import {
   resetPassword,
   changePassword,
   getProfile,
-} from "./auth.controller";
+} from "./auth.controller.js";
 
 export const authRouter = Router();
 

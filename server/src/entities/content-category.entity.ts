@@ -1,6 +1,6 @@
 import { Entity, Column, CreateDateColumn, ManyToOne, JoinColumn } from "typeorm";
-import { Content } from "./content.entity";
-import { Category } from "./category.entity";
+import { Content } from "./content.entity.js";
+import { Category } from "./category.entity.js";
 
 @Entity("content_categories")
 export class ContentCategory {

@@ -1,4 +1,4 @@
-import { approvalsService } from "../../features/approvals/approvals.service";
+import { approvalsService } from "../../features/approvals/approvals.service.js";
 
 //approved items can be published or can published according to a schedule."
 const INTERVAL_MS = 60_000;

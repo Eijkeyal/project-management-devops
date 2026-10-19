@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
-import type { ApiResponse } from "../../shared/types";
-import { rolesService } from "./roles.service";
+import type { ApiResponse } from "../../shared/types/index.js";
+import { rolesService } from "./roles.service.js";
 
 export async function getAllRoles(
   _req: Request,

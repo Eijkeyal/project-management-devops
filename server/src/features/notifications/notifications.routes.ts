@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { asyncHandler } from "../../shared/middleware/error.middleware";
-import { authenticate } from "../../shared/middleware/auth.middleware";
+import { asyncHandler } from "../../shared/middleware/error.middleware.js";
+import { authenticate } from "../../shared/middleware/auth.middleware.js";
 import {
   findMyNotifications,
   getUnreadCount,
   markNotificationRead,
   markAllNotificationsRead,
   removeNotification,
-} from "./notifications.controller";
+} from "./notifications.controller.js";
 
 export const notificationsRouter = Router();
 

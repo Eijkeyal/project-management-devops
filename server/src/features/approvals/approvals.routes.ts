@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { asyncHandler } from "../../shared/middleware/error.middleware";
-import { authenticate, authorize } from "../../shared/middleware/auth.middleware";
+import { asyncHandler } from "../../shared/middleware/error.middleware.js";
+import { authenticate, authorize } from "../../shared/middleware/auth.middleware.js";
 import {
   submitForApproval,
   approve,
@@ -8,7 +8,7 @@ import {
   cancel,
   listPending,
   listForContent,
-} from "./approvals.controller";
+} from "./approvals.controller.js";
 
 export const approvalsRouter = Router();
 

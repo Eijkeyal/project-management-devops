@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import type { ApiResponse } from "../../shared/types";
+import type { ApiResponse } from "../../shared/types/index.js";
 import type {
   CreateUserDto,
   UpdateUserDto,
@@ -10,9 +10,9 @@ import type {
   UserResponse,
   UserWithRoleResponse,
   UserStatsResponse,
-} from "./users.dto";
-import { usersService } from "./users.service";
-import { HttpError } from "../../shared/middleware/error.middleware";
+} from "./users.dto.js";
+import { usersService } from "./users.service.js";
+import { HttpError } from "../../shared/middleware/error.middleware.js";
 
 export async function findAllUsers(
   req: Request,

@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
-import type { ApiResponse } from "../../shared/types";
-import { adminService } from "./admin.service";
+import type { ApiResponse } from "../../shared/types/index.js";
+import { adminService } from "./admin.service.js";
 
 export async function getAdminDashboardStats(
   _req: Request,

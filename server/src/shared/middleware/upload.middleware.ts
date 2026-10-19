@@ -1,5 +1,5 @@
 import multer from "multer";
-import { HttpError } from "./error.middleware";
+import { HttpError } from "./error.middleware.js";
 
 const MAX_MB = Number(process.env.MAX_FILE_SIZE_MB ?? 25);
 

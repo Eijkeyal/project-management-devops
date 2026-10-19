@@ -1,11 +1,11 @@
 import type { EntityTarget, FindOptionsWhere, ObjectLiteral } from "typeorm";
-import { getRepo } from "../db/repositories";
+import { getRepo } from "../db/repositories.js";
 import type {
   FilterParams,
   PaginatedResponse,
   PaginationParams,
   SortParams,
-} from "../types";
+} from "../types/index.js";
 
 export type CreateDtoFor<Entity> = Partial<{
   [K in keyof Entity]: Entity[K];
